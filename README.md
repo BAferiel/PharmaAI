@@ -45,20 +45,4 @@ Les prédictions sont générées à partir de **modèles entraînés sur des da
 ```bash
 git clone https://github.com/BAferiel/PharmaAI.git
 cd PharmaAI
-### 3. Créer un Environnement Virtuel
-python -m venv env
-source env/bin/activate  # Linux/macOS
-env\Scripts\activate  # Windows
-### 4. Installer les Dépendances
-pip install -r requirements.txt
-### 5. Appliquer les Migrations
-python manage.py migrate
-### 6. Lancer le Serveur de Développement
-python manage.py runserver
-L’application sera accessible à l’adresse suivante : http://127.0.0.1:8000
-🧠 Modèles de Machine Learning
-Les modèles sont entraînés sur des datasets Kaggle et intégrés dans l’application pour fournir des prédictions en temps réel. Voici les principaux types de modèles utilisés :
 
-Régression logistique pour la prédiction de l'obésité.
-Random Forest pour les troubles mentaux.
-SVM (Support Vector Machine) pour le syndrome des ovaires polykystiques (PCOS).
