@@ -1,0 +1,93 @@
+{% extends "new_base.html" %}
+
+{% block title %}User Registration{% endblock title %}
+
+{% block body %}
+<div class="min-h-screen relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -inset-[10px] opacity-50">
+            <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div class="absolute top-0 -right-4 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        </div>
+    </div>
+
+    <div class="relative z-10 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div class="relative bg-gray-800/30 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-gray-700/50">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-30 transition duration-300"></div>
+                <div class="relative">
+                    <div class="text-center">
+                        <img class="mx-auto h-16 w-auto mb-8" src="/static/newlogo.PNG" alt="PharmaAI Logo">
+                        <h2 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+                            Create your account
+                        </h2>
+                        <p class="mt-2 text-sm text-indigo-200">
+                            Join PharmaAI and get started today
+                        </p>
+                    </div>
+
+                    <form method="post" class="mt-8 space-y-6">
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                        <div>
+                            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-indigo-200">
+                                {{ field.label }}
+                            </label>
+                            <div class="mt-1 relative rounded-xl shadow-sm">
+                                <input type="{{ field.field.widget.input_type }}"
+                                       name="{{ field.name }}"
+                                       id="{{ field.id_for_label }}"
+                                       {% if field.field.required %}required{% endif %}
+                                       class="block w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-500 text-white transition duration-200
+                                              {% if field.errors %}border-red-500{% endif %}"
+                                       placeholder="Enter your {{ field.label|lower }}">
+                            </div>
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            {% if field.help_text %}
+                                <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        <div class="flex items-center">
+                            <input id="terms" 
+                                   name="terms" 
+                                   type="checkbox"
+                                   required
+                                   class="h-4 w-4 bg-gray-900 border-gray-700 rounded text-indigo-600 focus:ring-indigo-500">
+                            <label for="terms" class="ml-2 block text-sm text-indigo-200">
+                                I agree to the 
+                                <a href="#" class="font-medium text-indigo-400 hover:text-indigo-300">
+                                    Terms and Conditions
+                                </a>
+                            </label>
+                        </div>
+
+                        <div>
+                            <button type="submit" 
+                                    class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105">
+                                Create Account
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="text-sm text-indigo-200">
+                            Already have an account? 
+                            <a href="/login" class="font-medium text-indigo-400 hover:text-indigo-300 transition duration-150 ease-in-out">
+                                Sign in
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
